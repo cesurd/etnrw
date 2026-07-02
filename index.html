@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Autoglas Dortmund: Steinschlag in 30 Min | ET Autoglas</title>
+<!-- Entwurf: noindex beim Go-Live entfernen -->
+<meta name="robots" content="noindex">
+<meta name="description" content="ET Autoglas Dortmund: Steinschlagreparatur in 30 Min., Scheibenwechsel mit 30 Jahren Garantie, Abwicklung direkt mit Deiner Versicherung. Jetzt Termin sichern!">
+<link rel="canonical" href="https://etnrw.de/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="de_DE">
+<meta property="og:site_name" content="ET Autoglas">
+<meta property="og:title" content="ET Autoglas Dortmund – Steinschlag? In 30 Minuten repariert.">
+<meta property="og:description" content="Für Kaskoversicherte in der Regel kostenlos. Scheibentausch mit 30 Jahren Garantie, mobiler Service, direkte Versicherungsabwicklung. Ein Team. Ein Service.">
+<meta property="og:url" content="https://etnrw.de/">
+<meta property="og:image" content="https://etnrw.de/Bilder/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="ET Autoglas Dortmund – Steinschlagreparatur in 30 Minuten">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://etnrw.de/Bilder/og-image.jpg">
+<link rel="icon" type="image/png" href="Bilder/favicon.png">
+<link rel="apple-touch-icon" href="Bilder/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,600..900&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        asphalt: '#0A0E14',
+        carbon: { 850: '#15181D', 900: '#1d1d1b' },
+        etblue: { DEFAULT: '#004982', deep: '#00304F', hover: '#0D6EB8' },
+        ice: '#7FD8FF',
+        frost: '#D6F1FF',
+        offwhite: '#F2F7FB',
+        steel: '#A9BDCE',
+        gold: '#F5B942'
+      },
+      fontFamily: {
+        display: ['Archivo', 'Arial Black', 'sans-serif'],
+        body: ['Manrope', 'Segoe UI', 'sans-serif'],
+        mono: ['"IBM Plex Mono"', 'Consolas', 'monospace']
+      }
+    }
+  }
+}
+</script>
+<style>
+  html { -webkit-text-size-adjust: 100%; scroll-padding-top: 88px; }
+  section[id] { scroll-margin-top: 88px; }
+  body { background-color: #0A0E14; }
+  .font-display { font-stretch: 125%; }
+
+  /* ---------- Glasscheiben-Karte: Lichtkante oben (cyan -> transparent) ----------
+     (kein backdrop-filter auf den Karten: 38 Blur-Roots ruinieren die Performance
+      auf Mittelklasse-Androids; Blur nur auf Header + Mobile-CTA-Bar) */
+  .pane { position: relative; background: rgba(21,26,34,0.72); border: 1px solid rgba(127,216,255,0.12); }
+  .pane::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 1px; background: linear-gradient(90deg, rgba(127,216,255,0.55), rgba(127,216,255,0)); border-radius: inherit; pointer-events: none; }
+  .pane::after { content: ''; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(115deg, rgba(255,255,255,0) 42%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0) 58%); pointer-events: none; }
+
+  /* ---------- Specular Streak (Lichtreflex) ---------- */
+  .streak { position: absolute; inset: -20% -10%; background: linear-gradient(102deg, transparent 38%, rgba(255,255,255,0.045) 47%, rgba(255,255,255,0.02) 52%, transparent 60%); pointer-events: none; }
+
+  /* ---------- Punktraster (Glasstruktur) ---------- */
+  .dots { background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px); background-size: 26px 26px; }
+
+  /* ---------- Scan-Line Hover auf CTAs ---------- */
+  .scan { position: relative; overflow: hidden; }
+  .scan::after { content: ''; position: absolute; top: -20%; bottom: -20%; left: -30%; width: 34%; background: linear-gradient(105deg, transparent, rgba(255,255,255,0.35), transparent); transform: translateX(-120%) rotate(8deg); transition: transform .05s; pointer-events: none; }
+  .scan:hover::after { transform: translateX(520%) rotate(8deg); transition: transform .7s ease; }
+
+  /* ---------- Marquee ---------- */
+  .marquee { overflow: hidden; }
+  .marquee-track { display: flex; width: max-content; animation: marquee 46s linear infinite; }
+  .marquee:hover .marquee-track, .marquee:focus-within .marquee-track { animation-play-state: paused; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ---------- Maßlinien-Annotationen ---------- */
+  .anno { opacity: 0; animation: annoIn .7s ease forwards; }
+  .anno-1 { animation-delay: .5s; } .anno-2 { animation-delay: .8s; } .anno-3 { animation-delay: 1.1s; }
+  @keyframes annoIn { to { opacity: 1; } }
+
+  /* ---------- Reveal on Scroll (nur wenn JS läuft, sonst alles sichtbar) ---------- */
+  .js .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+  .js .reveal.in { opacity: 1; transform: none; }
+
+  /* ---------- Duotone-Foto-Pipeline ---------- */
+  .duo { position: relative; overflow: hidden; background: #004982; }
+  .duo img { display: block; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.06) brightness(.94); mix-blend-mode: luminosity; }
+  .duo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(127,216,255,0.08), rgba(0,48,79,0.42) 80%); pointer-events: none; }
+
+  /* ---------- Kassenbon ---------- */
+  .receipt { background: #F7FAFC; color: #12161B; }
+  .receipt-zig { height: 12px; background-repeat: repeat-x; background-size: 16px 16px; }
+  .receipt-zig-b { background-image: linear-gradient(-45deg, #F7FAFC 8px, transparent 0), linear-gradient(45deg, #F7FAFC 8px, transparent 0); }
+  .receipt-zig-t { background-image: linear-gradient(-135deg, #F7FAFC 8px, transparent 0), linear-gradient(135deg, #F7FAFC 8px, transparent 0); }
+
+  /* ---------- Coupon-Stanzung ---------- */
+  .punch { position: absolute; width: 28px; height: 28px; border-radius: 9999px; background: #0A0E14; border: 1px solid rgba(127,216,255,0.12); }
+
+  /* ---------- Ablauf-Linie ---------- */
+  .flowline { background: linear-gradient(90deg, rgba(127,216,255,0.55), rgba(127,216,255,0.10)); }
+
+  /* ---------- FAQ ---------- */
+  details.faq summary { list-style: none; cursor: pointer; }
+  details.faq summary::-webkit-details-marker { display: none; }
+  details.faq .faq-icon { transition: transform .3s ease; }
+  details.faq[open] .faq-icon { transform: rotate(45deg); }
+
+  /* ---------- Mobile Sticky-CTA-Bar (eigenes CSS, KEINE Tailwind-Display-Klassen!) ---------- */
+  .mobile-cta { display: none; }
+  @media screen and (max-width: 1023.5px) {
+    .mobile-cta { display: grid !important; grid-template-columns: 1.25fr 1fr; gap: 10px; position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; padding: 10px 14px calc(10px + env(safe-area-inset-bottom)); background: rgba(10,14,20,0.88); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-top: 1px solid rgba(127,216,255,0.16); }
+    body { padding-bottom: 74px; }
+    body.nav-open .mobile-cta { display: none !important; }
+  }
+
+  /* ---------- Mobile-Menü: scrollbar, wenn der Viewport flach ist (Landscape) ---------- */
+  #mobileNav { max-height: calc(100dvh - 72px); overflow-y: auto; }
+
+  /* ---------- Print ---------- */
+  @media print {
+    #siteHeader, .mobile-cta, .marquee, .streak, .dots { display: none !important; }
+    body { background: #fff !important; color: #111 !important; padding-bottom: 0 !important; }
+  }
+
+  /* ---------- Reduced Motion ---------- */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .marquee-track { animation: none; }
+    .anno { animation: none; opacity: 1; }
+    .js .reveal { opacity: 1; transform: none; transition: none; }
+    .scan::after { display: none; }
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AutoRepair",
+  "@id": "https://etnrw.de/#business",
+  "name": "ET Autoglas",
+  "alternateName": "ET – Ein Team. Ein Service.",
+  "slogan": "Ein Team. Ein Service.",
+  "url": "https://etnrw.de/",
+  "telephone": "+4923019841640",
+  "contactPoint": [
+    { "@type": "ContactPoint", "contactType": "customer service", "name": "Service-Hotline", "telephone": "+491786866110", "availableLanguage": "de" },
+    { "@type": "ContactPoint", "contactType": "customer service", "name": "Werkstatt", "telephone": "+491728552727", "availableLanguage": "de" }
+  ],
+  "hasMap": "https://maps.google.com/?cid=13067805886777885781",
+  "sameAs": ["https://maps.google.com/?cid=13067805886777885781"],
+  "image": "https://etnrw.de/Bilder/werkstatt-tor.webp",
+  "logo": "https://etnrw.de/Bilder/Logo_et-autoglas.svg",
+  "founder": { "@type": "Person", "name": "Hakan Ertürk" },
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Am Zehnthof 60",
+    "postalCode": "44141",
+    "addressLocality": "Dortmund",
+    "addressRegion": "NRW",
+    "addressCountry": "DE"
+  },
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "09:30", "closes": "17:00" }
+  ],
+  "priceRange": "€€",
+  "areaServed": ["Dortmund", "Holzwickede", "Unna", "Ruhrgebiet"],
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "24", "bestRating": "5" },
+  "review": [
+    { "@type": "Review", "author": { "@type": "Person", "name": "Kevin Dierks" }, "reviewRating": { "@type": "Rating", "ratingValue": "5" }, "reviewBody": "Ich war heute bei ET Autoglas zum Austausch meiner Frontscheibe und bin absolut begeistert! Der gesamte Ablauf war von Anfang bis Ende professionell, freundlich und unkompliziert." },
+    { "@type": "Review", "author": { "@type": "Person", "name": "Tobias Gabriel" }, "reviewRating": { "@type": "Rating", "ratingValue": "5" }, "reviewBody": "Super Service und sehr freundliche Mitarbeiter! Die Arbeit wurde schnell und professionell erledigt. Mein Auto wurde abgeholt und anschließend zu meiner vollen Zufriedenheit wieder zurückgebracht." },
+    { "@type": "Review", "author": { "@type": "Person", "name": "Burak" }, "reviewRating": { "@type": "Rating", "ratingValue": "5" }, "reviewBody": "Ich bin sehr zufrieden mit dem Service von ET Autoglas. Alles hat schnell und unkompliziert geklappt. Der Service war einwandfrei und die fachliche Beratung wirklich sehr gut." }
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Leistungen",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Autoglas – Steinschlagreparatur & Scheibentausch", "description": "Steinschlagreparatur in 30 Minuten, Neueinbau von Front-, Heck- und Seitenscheiben in Erstausrüsterqualität, 30 Jahre Garantie, mobiler Service, Notverglasung bei Einbruchschaden." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Kfz-Gutachten", "description": "Schadengutachten, Wertgutachten und Gebrauchtwagen-Check für PKW, Transporter und Motorrad – geprüfte Gutachter nach den Richtlinien des Verbandes freier Kraftfahrzeug-Sachverständiger e. V." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Reifenservice", "description": "Räderwechsel in 20 Minuten ab 15 €, Reifenwechsel inkl. Wuchten und Altreifenentsorgung, bis 24 Zoll, Reifenverkauf neu und gebraucht, Einlagerung." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Scheibenfolierung", "description": "Sonnenschutzfolie ab 80 € mit sehr hoher Hitzerückweisung und UV-Schutz für die hinteren Seitenscheiben und die Heckscheibe, auch Folierung von Chromteilen." } }
+    ]
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Was kostet eine Steinschlagreparatur bei ET Autoglas?", "acceptedAnswer": { "@type": "Answer", "text": "Wenn Du kaskoversichert bist, in der Regel: nichts. Deine Versicherung übernimmt die Steinschlagreparatur normalerweise komplett, und wir rechnen direkt mit ihr ab. Die Reparatur selbst dauert bei uns in Dortmund nur 30 Minuten – und Du bekommst 30 Jahre Garantie auf die Haltbarkeit." } },
+    { "@type": "Question", "name": "Zahlt meine Kaskoversicherung den Austausch der Frontscheibe?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Beim Scheibentausch zahlst Du als Kaskoversicherter nur Deine Selbstbeteiligung – den Rest übernimmt Deine Versicherung. Wichtig zu wissen: Ein Glasschaden führt nicht zur Höherstufung, Dein Schadenfreiheitsrabatt bleibt unberührt. Die komplette Abwicklung mit der Versicherung übernehmen wir für Dich." } },
+    { "@type": "Question", "name": "Wie lange dauert die Reparatur oder der Scheibenwechsel?", "acceptedAnswer": { "@type": "Answer", "text": "Einen Steinschlag reparieren wir in 30 Minuten – Du kannst also direkt darauf warten. Beim Neueinbau einer Scheibe stimmen wir den Termin individuell mit Dir ab. Und wenn Du keine Zeit hast: Mit unserem Hol- & Bringservice holen wir Dein Auto ab und bringen es Dir fertig zurück." } },
+    { "@type": "Question", "name": "Kommt ET Autoglas auch zu mir nach Hause oder zur Arbeit?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Mit unserem mobilen Autoglas-Service kommen wir zu Dir – nach Hause oder zur Arbeit. Alternativ nutzt Du unseren Hol- & Bringservice: Wir holen Dein Auto ab, erledigen die Arbeit in unserer Werkstatt in Dortmund und bringen es Dir zurück." } },
+    { "@type": "Question", "name": "Meine Autoscheibe wurde eingeschlagen – was soll ich jetzt tun?", "acceptedAnswer": { "@type": "Answer", "text": "Ruf uns direkt an: Service-Hotline 0178 6866110. Bei einem Einbruchschaden leisten wir Soforthilfe und sichern Dein Auto mit einer Notverglasung ab, damit es dicht und fahrbereit ist. Die neue Scheibe bauen wir in Erstausrüsterqualität ein und wickeln den Schaden direkt mit Deiner Versicherung ab." } },
+    { "@type": "Question", "name": "Brauche ich nach einem Unfall ein Kfz-Gutachten?", "acceptedAnswer": { "@type": "Answer", "text": "Bei einem Haftpflichtschaden – also wenn der Unfall nicht Deine Schuld war – sichert Dir ein Schadengutachten Deine Ansprüche gegenüber der gegnerischen Versicherung. Unsere geprüften Gutachter arbeiten nach den Richtlinien des Verbandes freier Kraftfahrzeug-Sachverständiger e. V. und unterstützen Dich bei der Abwicklung – auf Wunsch stellen wir den Kontakt zu Anwalt und Versicherung her." } }
+  ]
+}
+</script>
+</head>
+<body class="bg-asphalt text-offwhite font-body antialiased">
+
+<a href="#inhalt" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-ice focus:text-asphalt focus:px-4 focus:py-2 focus:rounded">Zum Inhalt springen</a>
+
+<!-- ==================== HEADER ==================== -->
+<header id="siteHeader" class="fixed top-0 inset-x-0 z-50 transition-all duration-300">
+  <div class="bg-[#101113]/70 backdrop-blur-md border-b border-ice/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between gap-4 py-3.5 lg:py-4 transition-all duration-300" id="headerInner">
+      <a href="#top" class="flex items-center gap-3 shrink-0" aria-label="ET Autoglas – zur Startseite">
+        <svg viewBox="126 193 530 389" class="h-9 w-auto" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path fill="#7FD8FF" d="M657.78,200.07H213.92A225.36,225.36,0,0,0,192,222.56q-4.17,4.92-8,10.07c-33.05,43.69-51.12,99.17-51.12,157.7,0,63.11,21,122.69,59.16,167.76A223.34,223.34,0,0,0,213.3,580q2.64,2.38,5.34,4.65H422V517.52H243.38C222,493,206.81,460.45,201,423.9H393.64V356.75H201c5.52-34.56,19.42-65.49,39-89.53H462.19V584.68h67.15V267.22H657.78Z" transform="translate(-4.72 -4.57)"/></svg>
+        <span class="leading-none whitespace-nowrap">
+          <span class="block font-display font-extrabold uppercase tracking-wide text-offwhite text-base">Autoglas</span>
+          <span class="block font-mono text-[10px] text-steel tracking-[0.18em] uppercase mt-1 hidden md:block lg:hidden xl:block">Ein Team. Ein Service.</span>
+        </span>
+      </a>
+      <nav class="hidden lg:flex items-center gap-5 xl:gap-7 text-sm font-medium text-steel whitespace-nowrap" aria-label="Hauptnavigation">
+        <a href="#leistungen" class="hover:text-ice transition-colors">Leistungen</a>
+        <a href="#versicherung" class="hover:text-ice transition-colors">Versicherung</a>
+        <a href="#ablauf" class="hover:text-ice transition-colors">Ablauf</a>
+        <a href="#bewertungen" class="hover:text-ice transition-colors">Bewertungen</a>
+        <a href="#ueber-uns" class="hover:text-ice transition-colors">Über uns</a>
+        <a href="#kontakt" class="hover:text-ice transition-colors">Kontakt</a>
+      </nav>
+      <div class="flex items-center gap-3 shrink-0">
+        <a href="tel:+491786866110" class="scan hidden lg:inline-flex items-center gap-2 bg-ice text-asphalt font-bold text-sm rounded-full px-5 py-2.5 shadow-[0_0_24px_rgba(127,216,255,0.25)] hover:bg-frost transition-colors whitespace-nowrap">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z"/></svg>
+          <span class="hidden xl:inline">0178 6866110</span><span class="xl:hidden">Anrufen</span>
+        </a>
+        <button id="navToggle" class="lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-lg border border-ice/20 text-offwhite" aria-label="Menü" aria-expanded="false" aria-controls="mobileNav">
+          <svg id="iconBurger" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
+          <svg id="iconClose" class="w-6 h-6 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div id="mobileNav" class="lg:hidden hidden border-t border-ice/10 bg-[#0d1016]/95 backdrop-blur-md">
+      <nav class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex flex-col gap-1 text-base font-medium text-steel" aria-label="Mobile Navigation">
+        <a href="#leistungen" class="mnav py-3 border-b border-white/5 hover:text-ice">Leistungen</a>
+        <a href="#versicherung" class="mnav py-3 border-b border-white/5 hover:text-ice">Versicherung &amp; Kosten</a>
+        <a href="#ablauf" class="mnav py-3 border-b border-white/5 hover:text-ice">Ablauf</a>
+        <a href="#bewertungen" class="mnav py-3 border-b border-white/5 hover:text-ice">Bewertungen</a>
+        <a href="#ueber-uns" class="mnav py-3 border-b border-white/5 hover:text-ice">Über uns</a>
+        <a href="#faq" class="mnav py-3 border-b border-white/5 hover:text-ice">Häufige Fragen</a>
+        <a href="#kontakt" class="mnav py-3 hover:text-ice">Kontakt</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main id="inhalt">
+<!-- ==================== HERO ==================== -->
+<section id="top" class="relative overflow-hidden" style="background-image: radial-gradient(120% 120% at 18% 0%, #0A0E14 30%, #0c1a29 62%, #00304F 100%);">
+  <div class="dots absolute inset-0" aria-hidden="true"></div>
+  <div class="streak" aria-hidden="true" style="transform: rotate(-12deg);"></div>
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 pt-28 lg:pt-40 pb-14 lg:pb-24">
+    <div class="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+
+      <!-- Text -->
+      <div class="lg:col-span-7 relative z-10">
+        <div class="pane inline-flex items-center gap-2.5 rounded-full px-4 py-2 mb-7">
+          <span class="text-gold text-sm leading-none" aria-hidden="true">★★★★★</span>
+          <span class="font-mono text-[11px] sm:text-xs tracking-[0.14em] uppercase text-frost">Autoglas-Profi Dortmund · 5,0 bei Google · 24 Bewertungen</span>
+        </div>
+        <h1 class="font-display font-black uppercase leading-[0.95] tracking-tight text-[2.4rem] sm:text-6xl xl:text-7xl">
+          Steinschlag?<br>
+          <span class="text-ice">In 30 Minuten</span> repariert.
+        </h1>
+        <p class="mt-6 max-w-xl text-steel text-base sm:text-lg leading-relaxed">
+          Für Kaskoversicherte in der Regel <span class="text-frost font-semibold">kostenlos</span> – ohne Höherstufung. ET Autoglas kümmert sich um Deine Scheibe und um den Papierkram mit Deiner Versicherung. <span class="text-frost font-semibold whitespace-nowrap">Ein Team. Ein Service.</span>
+        </p>
+        <div class="mt-8 flex flex-col sm:flex-row gap-4">
+          <a href="tel:+491786866110" class="scan inline-flex items-center justify-center gap-2.5 bg-ice text-asphalt font-bold rounded-full px-8 py-4 text-base shadow-[0_0_36px_rgba(127,216,255,0.3)] hover:bg-frost transition-colors">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z"/></svg>
+            Jetzt anrufen: 0178 6866110
+          </a>
+          <a href="#kontakt" class="scan pane inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-base font-semibold text-offwhite hover:border-ice/30 transition-colors">Termin anfragen</a>
+        </div>
+        <ul class="mt-9 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-steel">
+          <li class="flex items-center gap-2"><span class="w-1 h-4 bg-gradient-to-b from-ice to-transparent inline-block" aria-hidden="true"></span>30 Jahre Garantie</li>
+          <li class="flex items-center gap-2"><span class="w-1 h-4 bg-gradient-to-b from-ice to-transparent inline-block" aria-hidden="true"></span>Direkte Versicherungsabwicklung</li>
+          <li class="flex items-center gap-2"><span class="w-1 h-4 bg-gradient-to-b from-ice to-transparent inline-block" aria-hidden="true"></span>Hol- &amp; Bringservice</li>
+        </ul>
+      </div>
+
+      <!-- Glasscheibe mit SUV + Riss + Annotationen -->
+      <div class="lg:col-span-5 relative">
+        <div class="absolute -inset-8 bg-etblue/40 blur-3xl rounded-full" aria-hidden="true"></div>
+        <div class="hidden md:block absolute -bottom-10 -left-4 lg:-left-8 w-52 lg:w-64 z-10 duo rounded-2xl border border-ice/15 shadow-2xl rotate-[-3deg]">
+          <img src="Bilder/frontscheibe-neu.webp" alt="Frisch eingebaute Frontscheibe in der ET-Autoglas-Werkstatt" width="1600" height="738" loading="lazy" class="aspect-[16/10]">
+          <span class="absolute bottom-2.5 left-3 font-mono text-[10px] tracking-[0.16em] uppercase text-frost/90 z-10">Frisch eingebaut · Werkstatt Dortmund</span>
+        </div>
+        <figure class="relative lg:rotate-[3deg] rounded-t-[42px] rounded-b-[22px] overflow-hidden border border-ice/20 bg-etblue-deep shadow-[0_30px_80px_rgba(0,0,0,0.5)]">
+          <img src="Bilder/hero-suv.webp" alt="Dunkelblauer SUV mit Regentropfen – Autoglas-Service bei ET in Dortmund" width="1000" height="889" fetchpriority="high" class="w-full h-auto block">
+          <div class="absolute inset-0 pointer-events-none" style="background: linear-gradient(180deg, rgba(10,14,20,0.18) 0%, rgba(10,14,20,0) 30%, rgba(10,14,20,0) 62%, rgba(10,14,20,0.38) 100%);" aria-hidden="true"></div>
+          <div class="absolute inset-0 pointer-events-none" style="background: linear-gradient(115deg, rgba(255,255,255,0) 40%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0) 60%);" aria-hidden="true"></div>
+          <div class="absolute inset-x-0 top-0 h-px" style="background: linear-gradient(90deg, rgba(127,216,255,0.8), rgba(127,216,255,0));" aria-hidden="true"></div>
+          <!-- Maßlinien (Desktop) -->
+          <div class="anno anno-1 hidden md:flex items-center absolute top-[24%] left-[6%]" aria-hidden="true">
+            <span class="font-mono text-[11px] tracking-[0.12em] uppercase bg-asphalt/85 text-frost px-2.5 py-1.5 rounded">Rep. 30 Min</span>
+            <span class="h-px w-14 bg-etblue-hover"></span><span class="w-2 h-2 rounded-full border-2 border-etblue-hover bg-white"></span>
+          </div>
+          <div class="anno anno-2 hidden md:flex items-center absolute top-[46%] right-[4%]" aria-hidden="true">
+            <span class="w-2 h-2 rounded-full border-2 border-etblue-hover bg-white"></span><span class="h-px w-12 bg-etblue-hover"></span>
+            <span class="font-mono text-[11px] tracking-[0.12em] uppercase bg-asphalt/85 text-frost px-2.5 py-1.5 rounded">Erstausrüsterqualität</span>
+          </div>
+          <div class="anno anno-3 hidden md:flex items-center absolute bottom-[6%] left-[48%]" aria-hidden="true">
+            <span class="font-mono text-[11px] tracking-[0.12em] uppercase bg-asphalt/85 text-frost px-2.5 py-1.5 rounded">30 Jahre Garantie</span>
+            <span class="h-px w-14 bg-etblue-hover"></span><span class="w-2 h-2 rounded-full border-2 border-etblue-hover bg-white"></span>
+          </div>
+          <figcaption class="sr-only">Autoglas-Service: Steinschlagreparatur in 30 Minuten, Neueinbau in Erstausrüsterqualität, 30 Jahre Garantie.</figcaption>
+        </figure>
+        <!-- Annotation-Chips (Mobile) -->
+        <div class="mt-4 flex flex-wrap gap-2 md:hidden">
+          <span class="pane rounded-full px-3.5 py-1.5 font-mono text-[11px] tracking-[0.12em] uppercase text-frost">Rep. 30 Min</span>
+          <span class="pane rounded-full px-3.5 py-1.5 font-mono text-[11px] tracking-[0.12em] uppercase text-frost">Erstausrüsterqualität</span>
+          <span class="pane rounded-full px-3.5 py-1.5 font-mono text-[11px] tracking-[0.12em] uppercase text-frost">30 Jahre Garantie</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Marquee -->
+  <div class="marquee relative border-y border-ice/10 bg-carbon-850/80 py-3.5" aria-hidden="true">
+    <div class="marquee-track font-display font-extrabold uppercase tracking-wider text-sm text-ice/80">
+      <span class="flex items-center shrink-0">
+        <span class="px-6">Ein Team. Ein Service.</span><span class="text-steel/60">✕</span>
+        <span class="px-6">Der Partner für Dein Auto!</span><span class="text-steel/60">✕</span>
+        <span class="px-6">30 Jahre Garantie</span><span class="text-steel/60">✕</span>
+        <span class="px-6">We know how to do it</span><span class="text-steel/60">✕</span>
+        <span class="px-6">Autoglas · Kfz-Gutachten · Reifen · Folierung</span><span class="text-steel/60">✕</span>
+        <span class="px-6">Ein Team. Ein Service.</span><span class="text-steel/60">✕</span>
+        <span class="px-6">Der Partner für Dein Auto!</span><span class="text-steel/60">✕</span>
+        <span class="px-6">30 Jahre Garantie</span><span class="text-steel/60">✕</span>
+        <span class="px-6">We know how to do it</span><span class="text-steel/60">✕</span>
+        <span class="px-6">Autoglas · Kfz-Gutachten · Reifen · Folierung</span><span class="text-steel/60">✕</span>
+      </span>
+      <span class="flex items-center shrink-0">
+        <span class="px-6">Ein Team. Ein Service.</span><span class="text-steel/60">✕</span>
+        <span class="px-6">Der Partner für Dein Auto!</span><span class="text-steel/60">✕</span>
+        <span class="px-6">30 Jahre Garantie</span><span class="text-steel/60">✕</span>
+        <span class="px-6">We know how to do it</span><span class="text-steel/60">✕</span>
+        <span class="px-6">Autoglas · Kfz-Gutachten · Reifen · Folierung</span><span class="text-steel/60">✕</span>
+        <span class="px-6">Ein Team. Ein Service.</span><span class="text-steel/60">✕</span>
+        <span class="px-6">Der Partner für Dein Auto!</span><span class="text-steel/60">✕</span>
+        <span class="px-6">30 Jahre Garantie</span><span class="text-steel/60">✕</span>
+        <span class="px-6">We know how to do it</span><span class="text-steel/60">✕</span>
+        <span class="px-6">Autoglas · Kfz-Gutachten · Reifen · Folierung</span><span class="text-steel/60">✕</span>
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== STAT-BAND ==================== -->
+<section class="bg-carbon-850 border-b border-ice/5" aria-label="ET Autoglas in Zahlen">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12 lg:py-16">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-y-10 gap-x-6">
+      <div class="reveal text-center lg:border-r border-ice/10">
+        <p class="font-display font-black text-5xl lg:text-6xl text-offwhite"><span data-count="30">30</span><span class="text-ice text-3xl lg:text-4xl align-baseline ml-1">Min</span></p>
+        <p class="mt-2 font-mono text-[11px] tracking-[0.16em] uppercase text-steel">Steinschlag-Reparatur</p>
+      </div>
+      <div class="reveal text-center lg:border-r border-ice/10">
+        <p class="font-display font-black text-5xl lg:text-6xl text-offwhite"><span data-count="30">30</span><span class="text-ice text-3xl lg:text-4xl align-baseline ml-1">Jahre</span></p>
+        <p class="mt-2 font-mono text-[11px] tracking-[0.16em] uppercase text-steel">Garantie: Haltbarkeit &amp; Dichtigkeit</p>
+      </div>
+      <div class="reveal text-center lg:border-r border-ice/10">
+        <p class="font-display font-black text-5xl lg:text-6xl text-offwhite">0<span class="text-ice text-3xl lg:text-4xl align-baseline ml-1">€*</span></p>
+        <p class="mt-2 font-mono text-[11px] tracking-[0.16em] uppercase text-steel">Für Kaskoversicherte</p>
+      </div>
+      <div class="reveal text-center">
+        <p class="font-display font-black text-5xl lg:text-6xl text-offwhite">5,0<span class="text-gold text-3xl lg:text-4xl align-baseline ml-1">★</span></p>
+        <p class="mt-2 font-mono text-[11px] tracking-[0.16em] uppercase text-steel">24 Bewertungen bei Google</p>
+      </div>
+    </div>
+    <p class="mt-8 text-center font-mono text-[11px] text-steel/70">*Steinschlagreparatur ist für Kaskoversicherte in der Regel kostenlos. Beim Neueinbau zahlst Du nur Deine Selbstbeteiligung. Garantie: auf die Haltbarkeit der Reparatur bzw. die Dichtigkeit des Neueinbaus.</p>
+  </div>
+</section>
+
+<!-- ==================== LEISTUNGEN ==================== -->
+<section id="leistungen" class="relative py-20 lg:py-28">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="reveal max-w-3xl">
+      <p class="font-mono text-xs tracking-[0.2em] uppercase text-ice mb-4">/01 &nbsp;Leistungen</p>
+      <h2 class="font-display font-black uppercase leading-[0.98] tracking-tight text-3xl sm:text-5xl"><span class="block font-body font-bold normal-case tracking-normal text-steel text-base sm:text-lg mb-2">Autoglas &amp; mehr in Dortmund</span>Ein Team. <span class="text-ice">Vier Services.</span></h2>
+      <p class="mt-5 text-steel text-base sm:text-lg leading-relaxed">ET Autoglas ist Deine Autoglas-Werkstatt in Dortmund (Am Zehnthof 60): Steinschlagreparatur in 30 Minuten – für Kaskoversicherte in der Regel kostenlos. Dazu Kfz-Gutachten, Reifenservice und Scheibenfolierung. Alles unter einem Dach, alles aus einer Hand.</p>
+    </div>
+
+    <div class="mt-12 grid lg:grid-cols-3 gap-6">
+      <!-- Autoglas Featured -->
+      <article class="reveal pane rounded-t-[34px] rounded-b-2xl lg:col-span-2 lg:row-span-2 p-6 sm:p-9 flex flex-col">
+        <div class="flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <p class="font-mono text-[11px] tracking-[0.18em] uppercase text-ice mb-2">Kernleistung</p>
+            <h3 class="font-display font-extrabold uppercase tracking-tight text-2xl sm:text-3xl">Autoglas</h3>
+            <p class="mt-1 text-frost font-semibold">Deine Scheibe. Unser Handwerk.</p>
+          </div>
+          <span class="pane rounded-full px-3.5 py-1.5 font-mono text-[11px] tracking-[0.1em] uppercase text-frost whitespace-nowrap">30 Min · Kasko: meist 0 €</span>
+        </div>
+        <div class="mt-6 rounded-t-[26px] rounded-b-xl overflow-hidden bg-etblue-deep relative">
+          <img src="Bilder/scheibenwechsel-werkstatt.webp" alt="Scheibenwechsel in der Werkstatt – neue Frontscheibe wird mit Saugheber eingesetzt" width="1280" height="853" loading="lazy" class="w-full h-56 sm:h-64 object-cover block">
+          <div class="absolute inset-x-0 top-0 h-px" style="background: linear-gradient(90deg, rgba(127,216,255,0.7), rgba(127,216,255,0));" aria-hidden="true"></div>
+        </div>
+        <p class="mt-6 text-steel leading-relaxed">Steinschlag oder Scheibe kaputt? Warte nicht, bis aus dem kleinen Einschlag ein Riss wird. Wir reparieren Deinen Steinschlag in 30 Minuten – und wenn getauscht werden muss, bekommst Du eine neue Scheibe in Erstausrüsterqualität. Die Abwicklung mit Deiner Versicherung übernehmen wir gleich mit.</p>
+        <!-- Datenblatt-Spec-Liste -->
+        <dl class="mt-6 divide-y divide-ice/10 border-y border-ice/10 text-sm">
+          <div class="flex justify-between gap-4 py-3"><dt class="text-steel">Steinschlagreparatur</dt><dd class="font-mono text-frost text-right">30 Min · Kasko: i. d. R. 0 €</dd></div>
+          <div class="flex justify-between gap-4 py-3"><dt class="text-steel">Neueinbau Front-, Heck- &amp; Seitenscheiben</dt><dd class="font-mono text-frost text-right">Erstausrüsterqualität</dd></div>
+          <div class="flex justify-between gap-4 py-3"><dt class="text-steel">Garantie (Haltbarkeit / Dichtigkeit)</dt><dd class="font-mono text-frost text-right">30 Jahre</dd></div>
+          <div class="flex justify-between gap-4 py-3"><dt class="text-steel">Mobiler Service</dt><dd class="font-mono text-frost text-right">Wir kommen zu Dir</dd></div>
+          <div class="flex justify-between gap-4 py-3"><dt class="text-steel">Einbruchschaden</dt><dd class="font-mono text-frost text-right">Soforthilfe + Notverglasung</dd></div>
+          <div class="flex justify-between gap-4 py-3"><dt class="text-steel">Versicherung</dt><dd class="font-mono text-frost text-right">Abwicklung durch uns</dd></div>
+          <div class="flex justify-between gap-4 py-3"><dt class="text-steel">Hol- &amp; Bringservice</dt><dd class="font-mono text-frost text-right">Auf Wunsch</dd></div>
+        </dl>
+        <div class="mt-7">
+          <a href="tel:+491786866110" class="scan inline-flex items-center gap-2 bg-ice text-asphalt font-bold rounded-full px-6 py-3 text-sm hover:bg-frost transition-colors">Steinschlag melden</a>
+        </div>
+      </article>
+
+      <!-- Kfz-Gutachten -->
+      <article class="reveal pane rounded-t-[28px] rounded-b-2xl p-6 sm:p-7 flex flex-col">
+        <div class="flex flex-wrap items-start justify-between gap-3">
+          <h3 class="font-display font-extrabold uppercase tracking-tight text-xl">Kfz-Gutachten</h3>
+          <span class="pane rounded-full px-3 py-1 font-mono text-[10px] tracking-[0.1em] uppercase text-frost whitespace-nowrap">Verbandsgeprüft</span>
+        </div>
+        <p class="mt-1.5 text-frost text-sm font-semibold">Unfall gehabt? Wir beziffern Deinen Schaden – schwarz auf weiß.</p>
+        <p class="mt-3 text-steel text-sm leading-relaxed">Geprüfte Kfz-Wert- und Schadengutachter nach den Richtlinien des Verbandes freier Kraftfahrzeug-Sachverständiger e. V. Wir unterstützen Dich bei der Abwicklung – auf Wunsch stellen wir den Kontakt zu Anwalt und Versicherung her.</p>
+        <ul class="mt-4 space-y-2 text-sm text-steel">
+          <li class="flex gap-2.5"><span class="text-ice mt-0.5" aria-hidden="true">✓</span>Schadengutachten bei Haftpflichtschaden</li>
+          <li class="flex gap-2.5"><span class="text-ice mt-0.5" aria-hidden="true">✓</span>Wertgutachten für Verkauf &amp; Oldtimer</li>
+          <li class="flex gap-2.5"><span class="text-ice mt-0.5" aria-hidden="true">✓</span>Gebrauchtwagen-Check vor dem Kauf</li>
+          <li class="flex gap-2.5"><span class="text-ice mt-0.5" aria-hidden="true">✓</span>PKW, Transporter &amp; Motorrad</li>
+        </ul>
+        <a href="#kontakt" data-topic="Kfz-Gutachten" class="mt-5 inline-flex items-center gap-1.5 py-3 -my-3 min-h-[44px] text-ice text-sm font-semibold hover:text-frost transition-colors">Gutachten anfragen <span aria-hidden="true">→</span></a>
+      </article>
+
+      <!-- Reifenservice -->
+      <article class="reveal pane rounded-t-[28px] rounded-b-2xl p-6 sm:p-7 flex flex-col">
+        <div class="flex flex-wrap items-start justify-between gap-3">
+          <h3 class="font-display font-extrabold uppercase tracking-tight text-xl">Reifenservice</h3>
+          <span class="pane rounded-full px-3 py-1 font-mono text-[10px] tracking-[0.1em] uppercase text-frost whitespace-nowrap">ab 15 € · 20 Min</span>
+        </div>
+        <p class="mt-1.5 text-frost text-sm font-semibold">Räderwechsel in 20 Minuten. Ab 15 €.</p>
+        <p class="mt-3 text-steel text-sm leading-relaxed">Kein halber Tag Wartezimmer: Räder in 20 Minuten gewechselt, komplette Reifenwechsel inklusive Wuchten in 30–40 Minuten – Altreifenentsorgung inklusive.</p>
+        <ul class="mt-4 space-y-2 text-sm text-steel">
+          <li class="flex gap-2.5"><span class="text-ice mt-0.5" aria-hidden="true">✓</span>Bis 24 Zoll – PKW, Kastenwagen &amp; SUV</li>
+          <li class="flex gap-2.5"><span class="text-ice mt-0.5" aria-hidden="true">✓</span>Reifenverkauf: neu &amp; gebraucht</li>
+          <li class="flex gap-2.5"><span class="text-ice mt-0.5" aria-hidden="true">✓</span>Einlagerung Deiner Räder</li>
+        </ul>
+        <a href="#aktion" class="mt-5 inline-flex items-center gap-1.5 py-3 -my-3 min-h-[44px] text-ice text-sm font-semibold hover:text-frost transition-colors">Zur Räderwechsel-Aktion <span aria-hidden="true">→</span></a>
+      </article>
+
+      <!-- Folierung -->
+      <article class="reveal pane rounded-t-[28px] rounded-b-2xl lg:col-span-3 p-6 sm:p-7">
+        <div class="grid sm:grid-cols-[1fr_auto] gap-6 items-center">
+          <div>
+            <div class="flex items-start gap-3 flex-wrap">
+              <h3 class="font-display font-extrabold uppercase tracking-tight text-xl">Scheibenfolierung</h3>
+              <span class="pane rounded-full px-3 py-1 font-mono text-[10px] tracking-[0.1em] uppercase text-frost whitespace-nowrap">ab 80 €</span>
+            </div>
+            <p class="mt-1.5 text-frost text-sm font-semibold">Cooler Kopf, cooler Look.</p>
+            <p class="mt-3 text-steel text-sm leading-relaxed max-w-3xl">Sonnenschutzfolie mit sehr hoher Hitzerückweisung und UV-Schutz für die hinteren Seitenscheiben und die Heckscheibe – damit Dein Auto im Sommer kein Backofen ist und der Innenraum nicht ausbleicht. Und wenn Dir Chrom zu viel Bling ist: Wir folieren auch Deine Chromteile (Chrome Delete).</p>
+          </div>
+          <a href="#kontakt" data-topic="Scheibenfolierung" class="scan pane rounded-full px-6 py-3 text-sm font-semibold text-offwhite hover:border-ice/30 transition-colors justify-self-start sm:justify-self-end inline-flex">Angebot anfragen</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== VERSICHERUNG / KASSENBON ==================== -->
+<section id="versicherung" class="relative overflow-hidden" style="background-image: linear-gradient(135deg, #004982 0%, #00304F 100%);">
+  <div class="streak" aria-hidden="true" style="transform: rotate(-10deg);"></div>
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-20 lg:py-28">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div class="reveal">
+        <p class="font-mono text-xs tracking-[0.2em] uppercase text-ice mb-4">/02 &nbsp;Versicherung &amp; Kosten</p>
+        <h2 class="font-display font-black uppercase leading-[0.98] tracking-tight text-3xl sm:text-5xl">Was kostet Dich das? <span class="text-ice">Meistens: nichts.</span></h2>
+        <p class="mt-6 text-frost/90 text-base sm:text-lg leading-relaxed max-w-xl">Glasschaden ist ein Fall für Deine Kaskoversicherung – und genau da holen wir für Dich das Maximum raus. Du bringst uns Dein Auto (oder wir kommen zu Dir), wir klären den Rest direkt mit Deiner Versicherung. Kein Formularkrieg, keine Warteschleife.</p>
+        <ul class="mt-7 space-y-3.5 max-w-xl">
+          <li class="flex gap-3 text-frost/95"><span class="text-ice font-bold mt-0.5" aria-hidden="true">✓</span><span><strong class="text-white">Steinschlagreparatur:</strong> für Kaskoversicherte in der Regel komplett kostenlos.</span></li>
+          <li class="flex gap-3 text-frost/95"><span class="text-ice font-bold mt-0.5" aria-hidden="true">✓</span><span><strong class="text-white">Scheibentausch:</strong> es fällt nur Deine Selbstbeteiligung an.</span></li>
+          <li class="flex gap-3 text-frost/95"><span class="text-ice font-bold mt-0.5" aria-hidden="true">✓</span><span><strong class="text-white">Keine Höherstufung:</strong> Dein Schadenfreiheitsrabatt bleibt beim Glasschaden unangetastet.</span></li>
+          <li class="flex gap-3 text-frost/95"><span class="text-ice font-bold mt-0.5" aria-hidden="true">✓</span><span><strong class="text-white">Direkte Abrechnung:</strong> wir rechnen mit Deiner Versicherung ab – Du kümmerst Dich um nichts.</span></li>
+        </ul>
+      </div>
+
+      <!-- Der 0,00-€-Beleg -->
+      <div class="reveal max-w-md w-full mx-auto lg:mx-0 lg:justify-self-end rotate-1">
+        <div class="receipt-zig receipt-zig-t" aria-hidden="true"></div>
+        <div class="receipt px-7 sm:px-9 py-8 font-mono text-[13px] sm:text-sm shadow-[0_30px_70px_rgba(0,0,0,0.45)]">
+          <p class="text-center font-semibold tracking-[0.2em] uppercase">ET Autoglas</p>
+          <p class="text-center text-[11px] text-[#5a6672] mt-1">Am Zehnthof 60 · 44141 Dortmund</p>
+          <p class="text-center text-[11px] text-[#5a6672]">— Dein Kassenbon bei Glasschaden —</p>
+          <div class="border-t border-dashed border-[#9aa6b0] my-5"></div>
+          <dl class="space-y-2.5">
+            <div class="flex justify-between gap-3"><dt>STEINSCHLAG-REPARATUR</dt><dd>0,00 €</dd></div>
+            <div class="flex justify-between gap-3"><dt>SCHADENABWICKLUNG</dt><dd>0,00 €</dd></div>
+            <div class="flex justify-between gap-3"><dt>HOL- &amp; BRINGSERVICE</dt><dd>AUF WUNSCH</dd></div>
+            <div class="flex justify-between gap-3"><dt>HÖHERSTUFUNG KASKO</dt><dd>ENTFÄLLT</dd></div>
+            <div class="flex justify-between gap-3"><dt>30 JAHRE GARANTIE</dt><dd>0,00 €</dd></div>
+          </dl>
+          <div class="border-t border-dashed border-[#9aa6b0] my-5"></div>
+          <div class="flex justify-between gap-3 font-semibold text-base"><span>DEIN ANTEIL (KASKO)</span><span>0,00 €*</span></div>
+          <p class="mt-4 text-[11px] text-[#5a6672] leading-relaxed">*Gilt für die Steinschlagreparatur; diese übernimmt i. d. R. Deine Kaskoversicherung. Beim Neueinbau zahlst Du nur Deine Selbstbeteiligung.</p>
+          <p class="mt-4 text-center tracking-[0.3em] text-[#5a6672]">·· DANKE FÜR DEIN VERTRAUEN ··</p>
+        </div>
+        <div class="receipt-zig receipt-zig-b" aria-hidden="true"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ABLAUF ==================== -->
+<section id="ablauf" class="py-20 lg:py-28">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="reveal max-w-3xl">
+      <p class="font-mono text-xs tracking-[0.2em] uppercase text-ice mb-4">/03 &nbsp;Ablauf</p>
+      <h2 class="font-display font-black uppercase leading-[0.98] tracking-tight text-3xl sm:text-5xl">In 4 Schritten <span class="text-ice">wieder klare Sicht.</span></h2>
+    </div>
+    <div class="mt-14 relative">
+      <div class="hidden lg:block absolute top-7 left-[12%] right-[12%] h-px flowline" aria-hidden="true"></div>
+      <ol class="grid lg:grid-cols-4 gap-10 lg:gap-6">
+        <li class="reveal relative lg:text-center">
+          <div class="flex lg:justify-center"><span class="pane w-14 h-14 rounded-full flex items-center justify-center font-display font-black text-ice text-lg">01</span></div>
+          <h3 class="mt-5 font-display font-extrabold uppercase tracking-tight text-lg">Melde Dich</h3>
+          <p class="mt-2.5 text-steel text-sm leading-relaxed lg:px-2">Ruf an, schreib uns oder komm direkt vorbei. Schick uns gern ein Foto vom Schaden – dann wissen wir sofort, was zu tun ist.</p>
+        </li>
+        <li class="reveal relative lg:text-center">
+          <div class="flex lg:justify-center"><span class="pane w-14 h-14 rounded-full flex items-center justify-center font-display font-black text-ice text-lg">02</span></div>
+          <h3 class="mt-5 font-display font-extrabold uppercase tracking-tight text-lg">Beratung &amp; Termin</h3>
+          <p class="mt-2.5 text-steel text-sm leading-relaxed lg:px-2">Wir sagen Dir ehrlich, ob repariert oder getauscht werden muss – und was Dich das kostet. Danach gibt’s einen festen Termin, samstags auch nach Vereinbarung.</p>
+        </li>
+        <li class="reveal relative lg:text-center">
+          <div class="flex lg:justify-center"><span class="pane w-14 h-14 rounded-full flex items-center justify-center font-display font-black text-ice text-lg">03</span></div>
+          <h3 class="mt-5 font-display font-extrabold uppercase tracking-tight text-lg">Wir machen.</h3>
+          <p class="mt-2.5 text-steel text-sm leading-relaxed lg:px-2">Steinschlag in 30 Minuten, Räderwechsel in 20. Auf Wunsch kommen wir mobil zu Dir oder holen Dein Auto ab und bringen es zurück. Die Versicherungsabwicklung läuft nebenbei – durch uns.</p>
+        </li>
+        <li class="reveal relative lg:text-center">
+          <div class="flex lg:justify-center"><span class="pane w-14 h-14 rounded-full flex items-center justify-center font-display font-black text-ice text-lg">04</span></div>
+          <h3 class="mt-5 font-display font-extrabold uppercase tracking-tight text-lg">Fertig. Mit Garantie.</h3>
+          <p class="mt-2.5 text-steel text-sm leading-relaxed lg:px-2">Du bekommst Dein Auto einsatzbereit zurück – beim Autoglas mit 30 Jahren Garantie auf Haltbarkeit und Dichtigkeit. Der Partner für Dein Auto!</p>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== AKTION: COUPON ==================== -->
+<section id="aktion" class="pb-20 lg:pb-28">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="reveal relative pane rounded-3xl overflow-hidden">
+      <div class="punch -left-3.5 top-1/2 -translate-y-1/2 hidden md:block" aria-hidden="true"></div>
+      <div class="punch -right-3.5 top-1/2 -translate-y-1/2 hidden md:block" aria-hidden="true"></div>
+      <div class="grid md:grid-cols-[1.1fr_1fr] items-stretch">
+        <div class="p-8 sm:p-10 flex flex-col justify-center">
+          <p class="inline-flex self-start items-center gap-2 rounded-full bg-ice/15 border border-ice/25 px-3.5 py-1.5 font-mono text-[11px] tracking-[0.16em] uppercase text-ice">Aktion</p>
+          <h2 class="mt-4 font-display font-black uppercase tracking-tight leading-[0.98] text-3xl sm:text-4xl">Räderwechsel <span class="text-ice whitespace-nowrap">ab 15&nbsp;€</span></h2>
+          <p class="mt-2 font-mono text-sm text-frost">In 20 Minuten wieder auf der Straße.</p>
+        </div>
+        <div class="relative p-8 sm:p-10 md:border-l md:border-dashed md:border-ice/25 border-t border-dashed border-ice/25 md:border-t-0 flex flex-col justify-center">
+          <p class="text-steel text-sm leading-relaxed">Sommerräder rauf, Winterräder runter? Kompletter Reifenwechsel mit Wuchten in 30–40 Minuten, Altreifenentsorgung inklusive – bis 24 Zoll, auch für Kastenwagen und SUV. Auf Wunsch lagern wir Deinen zweiten Satz gleich ein.</p>
+          <a href="tel:+491786866110" class="scan mt-5 inline-flex self-start items-center gap-2 bg-ice text-asphalt font-bold rounded-full px-6 py-3 text-sm hover:bg-frost transition-colors">Räderwechsel-Termin sichern</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== BEWERTUNGEN ==================== -->
+<section id="bewertungen" class="relative bg-carbon-850 border-y border-ice/5 py-20 lg:py-28 overflow-hidden">
+  <svg class="absolute -top-10 right-0 w-[480px] h-[480px] opacity-[0.07]" viewBox="0 0 400 400" fill="none" aria-hidden="true">
+    <g stroke="#7FD8FF" stroke-width="1.5">
+      <path d="M200 200 L80 90 L40 80"/><path d="M200 200 L310 70 L330 30"/><path d="M200 200 L350 180 L390 190"/>
+      <path d="M200 200 L320 300 L360 350"/><path d="M200 200 L140 330 L120 380"/><path d="M200 200 L60 260 L20 270"/>
+      <circle cx="200" cy="200" r="14"/><circle cx="200" cy="200" r="30"/>
+    </g>
+  </svg>
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="reveal grid lg:grid-cols-[auto_1fr] gap-8 lg:gap-14 items-center max-w-4xl">
+      <div class="flex items-end gap-4">
+        <p class="font-display font-black text-8xl sm:text-9xl leading-none text-offwhite">5,0</p>
+        <div class="pb-3">
+          <p><span role="img" aria-label="5 von 5 Sternen" class="text-gold text-2xl leading-none tracking-wider">★★★★★</span></p>
+          <p class="mt-2.5 inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.14em] uppercase text-steel">
+            <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white" aria-hidden="true">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.1c-.22-.66-.35-1.36-.35-2.1s.13-1.44.35-2.1V7.06H2.18A10.96 10.96 0 001 12c0 1.78.43 3.45 1.18 4.94l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+            </span>
+            24 Bewertungen bei Google
+          </p>
+        </div>
+      </div>
+      <div>
+        <p class="font-mono text-xs tracking-[0.2em] uppercase text-ice mb-3">/04 &nbsp;Bewertungen</p>
+        <h2 class="font-display font-black uppercase leading-[0.98] tracking-tight text-3xl sm:text-4xl">Kein einziger Ausreißer.</h2>
+        <p class="mt-3 text-steel leading-relaxed">Alle 24 Google-Bewertungen: fünf Sterne. Das sagen Kunden, die schon mit ihrer Scheibe bei uns waren – ungefiltert von Google.</p>
+        <a href="https://maps.google.com/?cid=13067805886777885781" target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-1.5 py-3 -my-1 min-h-[44px] text-ice text-sm font-semibold hover:text-frost transition-colors">Alle Bewertungen auf Google lesen <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+
+    <div class="mt-12 flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory lg:grid lg:grid-cols-3 lg:overflow-visible lg:pb-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ice" tabindex="0" role="region" aria-label="Kundenbewertungen">
+      <!-- Lead-Review -->
+      <blockquote class="reveal pane rounded-t-[26px] rounded-b-xl p-6 sm:p-7 min-w-[85%] sm:min-w-[420px] lg:min-w-0 snap-start lg:col-span-2">
+        <p class="text-ice text-4xl font-display leading-none" aria-hidden="true">„</p>
+        <p class="mt-2 text-offwhite leading-relaxed">Ich war heute bei ET Autoglas zum Austausch meiner Frontscheibe und bin absolut begeistert! Der gesamte Ablauf war von Anfang bis Ende professionell, freundlich und unkompliziert. Die Terminvergabe ging schnell, ich wurde transparent beraten und die Arbeit wurde sauber und fachgerecht ausgeführt. So wünscht man sich Service!</p>
+        <footer class="mt-5 flex items-center justify-between gap-3">
+          <cite class="not-italic font-semibold text-frost">Kevin Dierks</cite>
+          <span role="img" class="text-gold tracking-wider" aria-label="5 von 5 Sternen">★★★★★</span>
+        </footer>
+      </blockquote>
+      <blockquote class="reveal pane rounded-t-[26px] rounded-b-xl p-6 sm:p-7 min-w-[85%] sm:min-w-[420px] lg:min-w-0 snap-start">
+        <p class="text-ice text-4xl font-display leading-none" aria-hidden="true">„</p>
+        <p class="mt-2 text-offwhite text-sm leading-relaxed">Einfache und fachliche Beratung. Service auf höchstem Niveau. Scheibenwechsel wurde schnell und unkompliziert erledigt. Sehr zu empfehlen!</p>
+        <footer class="mt-5 flex items-center justify-between gap-3">
+          <cite class="not-italic font-semibold text-frost">Tuncay</cite>
+          <span role="img" class="text-gold tracking-wider" aria-label="5 von 5 Sternen">★★★★★</span>
+        </footer>
+      </blockquote>
+      <blockquote class="reveal pane rounded-t-[26px] rounded-b-xl p-6 sm:p-7 min-w-[85%] sm:min-w-[420px] lg:min-w-0 snap-start">
+        <p class="text-ice text-4xl font-display leading-none" aria-hidden="true">„</p>
+        <p class="mt-2 text-offwhite text-sm leading-relaxed">Hervorragender Service – absolut empfehlenswert! Von der Terminvereinbarung bis zur Fertigstellung lief alles schnell, unkompliziert und sehr professionell. Die Mitarbeiter waren äußerst freundlich, kompetent und haben mich transparent über alle Schritte informiert.</p>
+        <footer class="mt-5 flex items-center justify-between gap-3">
+          <cite class="not-italic font-semibold text-frost">Galip K.</cite>
+          <span role="img" class="text-gold tracking-wider" aria-label="5 von 5 Sternen">★★★★★</span>
+        </footer>
+      </blockquote>
+      <blockquote class="reveal pane rounded-t-[26px] rounded-b-xl p-6 sm:p-7 min-w-[85%] sm:min-w-[420px] lg:min-w-0 snap-start">
+        <p class="text-ice text-4xl font-display leading-none" aria-hidden="true">„</p>
+        <p class="mt-2 text-offwhite text-sm leading-relaxed">Super Service und sehr freundliche Mitarbeiter! Die Arbeit wurde schnell und professionell erledigt. Mein Auto wurde abgeholt und anschließend zu meiner vollen Zufriedenheit wieder zurückgebracht. Vielen Dank an das Team von ET Autoglas – absolut empfehlenswert.</p>
+        <footer class="mt-5 flex items-center justify-between gap-3">
+          <cite class="not-italic font-semibold text-frost">Tobias Gabriel</cite>
+          <span role="img" class="text-gold tracking-wider" aria-label="5 von 5 Sternen">★★★★★</span>
+        </footer>
+      </blockquote>
+      <blockquote class="reveal pane rounded-t-[26px] rounded-b-xl p-6 sm:p-7 min-w-[85%] sm:min-w-[420px] lg:min-w-0 snap-start">
+        <p class="text-ice text-4xl font-display leading-none" aria-hidden="true">„</p>
+        <p class="mt-2 text-offwhite text-sm leading-relaxed">Ich bin sehr zufrieden mit dem Service von ET Autoglas. Alles hat schnell und unkompliziert geklappt. Der Service war einwandfrei und die fachliche Beratung wirklich sehr gut. Man fühlt sich bestens aufgehoben und professionell betreut. Immer wieder empfehlenswert!</p>
+        <footer class="mt-5 flex items-center justify-between gap-3">
+          <cite class="not-italic font-semibold text-frost">Burak</cite>
+          <span role="img" class="text-gold tracking-wider" aria-label="5 von 5 Sternen">★★★★★</span>
+        </footer>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ÜBER UNS ==================== -->
+<section id="ueber-uns" class="py-20 lg:py-28">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div class="reveal relative max-w-md mx-auto lg:mx-0 w-full">
+        <div class="absolute -inset-6 bg-etblue/30 blur-3xl rounded-full" aria-hidden="true"></div>
+        <div class="duo relative rounded-t-[38px] rounded-b-2xl border border-ice/15 shadow-2xl">
+          <img src="Bilder/team-werkstatt.webp" alt="ET-Mechaniker im Team-Pulli bei der Arbeit am Fahrzeug in der Werkstatt" width="1100" height="1467" loading="lazy" class="aspect-[3/4]">
+          <div class="absolute inset-x-0 top-0 h-px z-10" style="background: linear-gradient(90deg, rgba(127,216,255,0.7), rgba(127,216,255,0));" aria-hidden="true"></div>
+        </div>
+        <div class="duo absolute -bottom-8 -right-4 sm:-right-8 w-40 sm:w-52 rounded-2xl border border-ice/15 shadow-2xl rotate-2">
+          <img src="Bilder/werkstatt-tor.webp" alt="Werkstatt-Tor von ET Autoglas mit Autoglas- und Kfz-Gutachten-Beschriftung" width="1600" height="1205" loading="lazy" class="aspect-[4/3]">
+        </div>
+      </div>
+      <div class="reveal">
+        <p class="font-mono text-xs tracking-[0.2em] uppercase text-ice mb-4">/05 &nbsp;Über uns</p>
+        <h2 class="font-display font-black uppercase leading-[0.98] tracking-tight text-3xl sm:text-5xl">Ein Team. <span class="text-ice">Ein Service.</span></h2>
+        <p class="mt-6 text-steel leading-relaxed">Hinter ET Autoglas steht <strong class="text-frost">Hakan Ertürk</strong> mit seinem Team – am Zehnthof 60 in Dortmund. Autoglas, Kfz-Gutachten, Reifenservice und Scheibenfolierung: alles unter einem Dach, alles aus einer Hand.</p>
+        <p class="mt-4 text-steel leading-relaxed">Du sprichst direkt mit den Leuten, die an Deinem Auto arbeiten – ohne Callcenter, ohne Umwege. Wir sagen Dir klar, was Sache ist, halten Termine ein und stehen mit 30 Jahren Garantie hinter unserer Autoglas-Arbeit. <span class="text-frost font-semibold">We know how to do it</span> – und Du merkst das ab der ersten Minute.</p>
+        <p class="mt-7 font-display font-extrabold uppercase tracking-tight text-2xl text-offwhite">„Der Partner für <span class="text-ice">Dein Auto</span>!“</p>
+        <div class="mt-7 pane rounded-2xl p-5 flex items-start gap-4">
+          <svg class="w-8 h-8 shrink-0 text-ice" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"/></svg>
+          <p class="text-sm text-steel leading-relaxed"><strong class="text-frost">Geprüfte Kfz-Wert- und Schadengutachter</strong> nach den Richtlinien des Verbandes freier Kraftfahrzeug-Sachverständiger e. V.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FAQ ==================== -->
+<section id="faq" class="pb-20 lg:pb-28">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6">
+    <div class="reveal">
+      <p class="font-mono text-xs tracking-[0.2em] uppercase text-ice mb-4">/06 &nbsp;Häufige Fragen</p>
+      <h2 class="font-display font-black uppercase leading-[0.98] tracking-tight text-3xl sm:text-5xl">Kurz &amp; klar <span class="text-ice">beantwortet.</span></h2>
+    </div>
+    <div class="mt-10 space-y-4">
+      <details class="faq reveal pane rounded-2xl">
+        <summary class="flex items-center justify-between gap-4 p-5 sm:p-6">
+          <span class="font-semibold text-offwhite text-base sm:text-lg">Was kostet eine Steinschlagreparatur bei ET Autoglas?</span>
+          <span class="faq-icon shrink-0 w-8 h-8 rounded-full border border-ice/25 text-ice flex items-center justify-center text-xl leading-none" aria-hidden="true">+</span>
+        </summary>
+        <p class="px-5 sm:px-6 pb-6 -mt-1 text-steel leading-relaxed">Wenn Du kaskoversichert bist, in der Regel: nichts. Deine Versicherung übernimmt die Steinschlagreparatur normalerweise komplett, und wir rechnen direkt mit ihr ab. Die Reparatur selbst dauert bei uns in Dortmund nur 30 Minuten – und Du bekommst 30 Jahre Garantie auf die Haltbarkeit.</p>
+      </details>
+      <details class="faq reveal pane rounded-2xl">
+        <summary class="flex items-center justify-between gap-4 p-5 sm:p-6">
+          <span class="font-semibold text-offwhite text-base sm:text-lg">Zahlt meine Kaskoversicherung den Austausch der Frontscheibe?</span>
+          <span class="faq-icon shrink-0 w-8 h-8 rounded-full border border-ice/25 text-ice flex items-center justify-center text-xl leading-none" aria-hidden="true">+</span>
+        </summary>
+        <p class="px-5 sm:px-6 pb-6 -mt-1 text-steel leading-relaxed">Ja. Beim Scheibentausch zahlst Du als Kaskoversicherter nur Deine Selbstbeteiligung – den Rest übernimmt Deine Versicherung. Wichtig zu wissen: Ein Glasschaden führt nicht zur Höherstufung, Dein Schadenfreiheitsrabatt bleibt unberührt. Die komplette Abwicklung mit der Versicherung übernehmen wir für Dich.</p>
+      </details>
+      <details class="faq reveal pane rounded-2xl">
+        <summary class="flex items-center justify-between gap-4 p-5 sm:p-6">
+          <span class="font-semibold text-offwhite text-base sm:text-lg">Wie lange dauert die Reparatur oder der Scheibenwechsel?</span>
+          <span class="faq-icon shrink-0 w-8 h-8 rounded-full border border-ice/25 text-ice flex items-center justify-center text-xl leading-none" aria-hidden="true">+</span>
+        </summary>
+        <p class="px-5 sm:px-6 pb-6 -mt-1 text-steel leading-relaxed">Einen Steinschlag reparieren wir in 30 Minuten – Du kannst also direkt darauf warten. Beim Neueinbau einer Scheibe stimmen wir den Termin individuell mit Dir ab. Und wenn Du keine Zeit hast: Mit unserem Hol- &amp; Bringservice holen wir Dein Auto ab und bringen es Dir fertig zurück.</p>
+      </details>
+      <details class="faq reveal pane rounded-2xl">
+        <summary class="flex items-center justify-between gap-4 p-5 sm:p-6">
+          <span class="font-semibold text-offwhite text-base sm:text-lg">Kommt ET Autoglas auch zu mir nach Hause oder zur Arbeit?</span>
+          <span class="faq-icon shrink-0 w-8 h-8 rounded-full border border-ice/25 text-ice flex items-center justify-center text-xl leading-none" aria-hidden="true">+</span>
+        </summary>
+        <p class="px-5 sm:px-6 pb-6 -mt-1 text-steel leading-relaxed">Ja. Mit unserem mobilen Autoglas-Service kommen wir zu Dir – nach Hause oder zur Arbeit. Alternativ nutzt Du unseren Hol- &amp; Bringservice: Wir holen Dein Auto ab, erledigen die Arbeit in unserer Werkstatt in Dortmund und bringen es Dir zurück.</p>
+      </details>
+      <details class="faq reveal pane rounded-2xl">
+        <summary class="flex items-center justify-between gap-4 p-5 sm:p-6">
+          <span class="font-semibold text-offwhite text-base sm:text-lg">Meine Autoscheibe wurde eingeschlagen – was soll ich jetzt tun?</span>
+          <span class="faq-icon shrink-0 w-8 h-8 rounded-full border border-ice/25 text-ice flex items-center justify-center text-xl leading-none" aria-hidden="true">+</span>
+        </summary>
+        <p class="px-5 sm:px-6 pb-6 -mt-1 text-steel leading-relaxed">Ruf uns direkt an: Service-Hotline 0178 6866110. Bei einem Einbruchschaden leisten wir Soforthilfe und sichern Dein Auto mit einer Notverglasung ab, damit es dicht und fahrbereit ist. Die neue Scheibe bauen wir in Erstausrüsterqualität ein und wickeln den Schaden direkt mit Deiner Versicherung ab.</p>
+      </details>
+      <details class="faq reveal pane rounded-2xl">
+        <summary class="flex items-center justify-between gap-4 p-5 sm:p-6">
+          <span class="font-semibold text-offwhite text-base sm:text-lg">Brauche ich nach einem Unfall ein Kfz-Gutachten?</span>
+          <span class="faq-icon shrink-0 w-8 h-8 rounded-full border border-ice/25 text-ice flex items-center justify-center text-xl leading-none" aria-hidden="true">+</span>
+        </summary>
+        <p class="px-5 sm:px-6 pb-6 -mt-1 text-steel leading-relaxed">Bei einem Haftpflichtschaden – also wenn der Unfall nicht Deine Schuld war – sichert Dir ein Schadengutachten Deine Ansprüche gegenüber der gegnerischen Versicherung. Unsere geprüften Gutachter arbeiten nach den Richtlinien des Verbandes freier Kraftfahrzeug-Sachverständiger e. V. und unterstützen Dich bei der Abwicklung – auf Wunsch stellen wir den Kontakt zu Anwalt und Versicherung her.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== KONTAKT ==================== -->
+<section id="kontakt" class="relative bg-carbon-850 border-t border-ice/5 overflow-hidden">
+  <div class="streak" aria-hidden="true" style="transform: rotate(-14deg);"></div>
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-20 lg:py-28">
+    <div class="reveal max-w-3xl">
+      <p class="font-mono text-xs tracking-[0.2em] uppercase text-ice mb-4">/07 &nbsp;Kontakt</p>
+      <h2 class="font-display font-black uppercase leading-[0.98] tracking-tight text-3xl sm:text-5xl">Sag uns, was <span class="text-ice">Dein Auto braucht.</span></h2>
+      <p class="mt-5 text-steel text-base sm:text-lg">Am schnellsten: Ruf kurz an. Wir sagen Dir sofort, was zu tun ist – und wann Du drankommst.</p>
+    </div>
+
+    <div class="mt-12 grid lg:grid-cols-2 gap-10 lg:gap-14">
+      <!-- Kontaktdaten -->
+      <div class="reveal space-y-7">
+        <div class="space-y-3">
+          <a href="tel:+491786866110" class="scan rounded-2xl flex flex-wrap items-center justify-between gap-x-4 gap-y-1 px-5 sm:px-6 py-4 min-h-[72px] bg-ice text-asphalt shadow-[0_0_30px_rgba(127,216,255,0.22)] hover:bg-frost transition-colors">
+            <span class="font-mono text-[11px] tracking-[0.16em] uppercase text-asphalt/70">Service-Hotline · Glasschaden &amp; Termine</span>
+            <span class="font-mono font-bold text-lg sm:text-xl">0178 6866110</span>
+          </a>
+          <a href="tel:+491728552727" class="pane scan rounded-2xl flex flex-wrap items-center justify-between gap-x-4 gap-y-1 px-5 sm:px-6 py-4 min-h-[64px] hover:border-ice/30 transition-colors">
+            <span class="font-mono text-[11px] tracking-[0.16em] uppercase text-steel">Werkstatt · laufende Aufträge</span>
+            <span class="font-mono font-semibold text-lg sm:text-xl text-frost">0172 8552727</span>
+          </a>
+          <a href="tel:+4923019841640" class="pane scan rounded-2xl flex flex-wrap items-center justify-between gap-x-4 gap-y-1 px-5 sm:px-6 py-4 min-h-[64px] hover:border-ice/30 transition-colors">
+            <span class="font-mono text-[11px] tracking-[0.16em] uppercase text-steel">Zentrale · Büro</span>
+            <span class="font-mono font-semibold text-lg sm:text-xl text-frost">02301 9841640</span>
+          </a>
+          <div class="pane rounded-2xl flex items-center justify-between gap-4 px-5 sm:px-6 py-4 min-h-[64px]" aria-live="polite">
+            <span class="font-mono text-[11px] tracking-[0.16em] uppercase text-steel">E-Mail</span>
+            <a href="#" id="mailLink" class="font-mono font-semibold text-base sm:text-lg text-frost hover:text-ice transition-colors py-2 -my-2" data-u="info" data-d="etnrw.de">E-Mail schreiben →</a>
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-5">
+          <div class="pane rounded-2xl p-5 sm:p-6">
+            <p class="font-mono text-[11px] tracking-[0.16em] uppercase text-steel mb-3">Werkstatt</p>
+            <address class="not-italic text-offwhite leading-relaxed">Am Zehnthof 60<br>44141 Dortmund</address>
+            <p class="mt-3 text-sm text-steel">Auch für Holzwickede, Unna und das östliche Ruhrgebiet – oder mobil direkt bei Dir.</p>
+          </div>
+          <div class="pane rounded-2xl p-5 sm:p-6">
+            <p class="font-mono text-[11px] tracking-[0.16em] uppercase text-steel mb-3">Öffnungszeiten <span id="openBadge" class="normal-case tracking-normal"></span></p>
+            <dl class="text-sm space-y-1.5 text-offwhite">
+              <div class="flex justify-between gap-3"><dt class="text-steel">Mo–Fr</dt><dd class="font-mono">09:30–17:00</dd></div>
+              <div class="flex justify-between gap-3"><dt class="text-steel">Samstag</dt><dd class="font-mono">nach Vereinbarung</dd></div>
+              <div class="flex justify-between gap-3"><dt class="text-steel">Sonntag</dt><dd class="font-mono">geschlossen</dd></div>
+            </dl>
+            <p id="closedHint" class="hidden mt-3 text-xs text-steel leading-relaxed">Gerade zu? Schick uns Deine Nummer über das Formular – wir rufen Dich am nächsten Werktag zurück.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formular (Attrappe) -->
+      <div class="reveal">
+        <form id="contactForm" class="pane rounded-t-[30px] rounded-b-2xl p-6 sm:p-8" novalidate>
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label for="f-name" class="block font-mono text-[11px] tracking-[0.16em] uppercase text-steel mb-2">Name*</label>
+              <input id="f-name" name="name" type="text" required autocomplete="name" class="w-full rounded-xl bg-asphalt/60 border border-ice/15 px-4 py-3.5 text-base text-offwhite placeholder-steel/70 focus:outline-none focus:border-ice focus:ring-2 focus:ring-ice/40" placeholder="Dein Name">
+            </div>
+            <div>
+              <label for="f-tel" class="block font-mono text-[11px] tracking-[0.16em] uppercase text-steel mb-2">Telefon*</label>
+              <input id="f-tel" name="tel" type="tel" required autocomplete="tel" class="w-full rounded-xl bg-asphalt/60 border border-ice/15 px-4 py-3.5 text-base text-offwhite placeholder-steel/70 focus:outline-none focus:border-ice focus:ring-2 focus:ring-ice/40" placeholder="Für den schnellen Rückruf">
+            </div>
+          </div>
+          <div class="mt-5">
+            <label for="f-topic" class="block font-mono text-[11px] tracking-[0.16em] uppercase text-steel mb-2">Anliegen</label>
+            <select id="f-topic" name="topic" class="w-full rounded-xl bg-asphalt/60 border border-ice/15 px-4 py-3.5 text-base text-offwhite focus:outline-none focus:border-ice focus:ring-2 focus:ring-ice/40">
+              <option>Steinschlag reparieren</option>
+              <option>Scheibe tauschen</option>
+              <option>Einbruchschaden / Notverglasung</option>
+              <option>Kfz-Gutachten</option>
+              <option>Reifenservice / Räderwechsel</option>
+              <option>Scheibenfolierung</option>
+              <option>Sonstiges</option>
+            </select>
+          </div>
+          <div class="mt-5">
+            <label for="f-msg" class="block font-mono text-[11px] tracking-[0.16em] uppercase text-steel mb-2">Deine Nachricht</label>
+            <textarea id="f-msg" name="msg" rows="4" class="w-full rounded-xl bg-asphalt/60 border border-ice/15 px-4 py-3.5 text-base text-offwhite placeholder-steel/70 focus:outline-none focus:border-ice focus:ring-2 focus:ring-ice/40" placeholder="Was ist passiert? Gern mit Fahrzeug und Wunschtermin."></textarea>
+          </div>
+          <label class="mt-5 flex items-start gap-3 text-sm text-steel cursor-pointer">
+            <input type="checkbox" required class="mt-1 w-4 h-4 accent-[#7FD8FF]">
+            <span>Ich habe die <a href="#" class="dead-link underline decoration-ice/40 hover:text-ice">Datenschutzerklärung</a> zur Kenntnis genommen.*</span>
+          </label>
+          <button type="submit" class="scan mt-6 w-full inline-flex items-center justify-center gap-2 bg-ice text-asphalt font-bold rounded-full px-8 py-4 text-base hover:bg-frost transition-colors">Nachricht senden</button>
+          <p id="formNote" class="mt-4 text-xs text-steel/80 leading-relaxed">Schick uns kurz Dein Anliegen. Nach dem Absenden öffnet sich Deine E-Mail-App mit der fertigen Nachricht – ein Foto vom Schaden hängst Du dort einfach an. Wenn’s eilt: Ruf direkt die Service-Hotline an.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="bg-carbon-900 border-t border-ice/10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-14">
+    <div class="grid md:grid-cols-3 gap-10 items-start">
+      <div>
+        <img src="Bilder/Logo_et-autoglas_weiss.svg" alt="ET Autoglas Logo" width="832" height="768" class="h-24 w-auto" loading="lazy">
+        <p class="mt-4 font-display font-extrabold uppercase tracking-tight text-offwhite">Ein Team. Ein Service.</p>
+        <p class="mt-1 text-sm text-steel">Der Partner für Dein Auto!</p>
+      </div>
+      <nav class="text-sm text-steel space-y-2.5" aria-label="Footer-Navigation">
+        <p class="font-mono text-[11px] tracking-[0.18em] uppercase text-frost/70 mb-3">Leistungen</p>
+        <a href="#leistungen" class="block hover:text-ice transition-colors">Autoglas – Steinschlag &amp; Scheibentausch</a>
+        <a href="#leistungen" class="block hover:text-ice transition-colors">Kfz-Gutachten</a>
+        <a href="#leistungen" class="block hover:text-ice transition-colors">Reifenservice</a>
+        <a href="#leistungen" class="block hover:text-ice transition-colors">Scheibenfolierung</a>
+      </nav>
+      <div class="text-sm text-steel">
+        <p class="font-mono text-[11px] tracking-[0.18em] uppercase text-frost/70 mb-3">Kontakt</p>
+        <address class="not-italic leading-relaxed">
+          ET Autoglas · Hakan Ertürk<br>
+          Am Zehnthof 60 · 44141 Dortmund<br>
+          <a href="tel:+491786866110" class="hover:text-ice transition-colors">Service-Hotline: 0178 6866110</a><br>
+          <a href="tel:+4923019841640" class="hover:text-ice transition-colors">Zentrale: 02301 9841640</a>
+        </address>
+      </div>
+    </div>
+    <div class="mt-12 pt-6 border-t border-white/5 flex flex-col sm:flex-row justify-between gap-3 text-xs text-steel/70">
+      <p>© 2026 ET Autoglas · <a href="#" class="dead-link hover:text-ice">Impressum</a> · <a href="#" class="dead-link hover:text-ice">Datenschutz</a></p>
+      <p class="font-mono">Website-Entwurf · Rex Fortis</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ==================== MOBILE STICKY CTA ==================== -->
+<div class="mobile-cta" role="navigation" aria-label="Schnellkontakt">
+  <a href="tel:+491786866110" class="inline-flex items-center justify-center gap-2 bg-ice text-asphalt font-bold rounded-full py-3 text-sm">
+    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z"/></svg>
+    Jetzt anrufen
+  </a>
+  <a href="#kontakt" class="inline-flex items-center justify-center rounded-full py-3 text-sm font-semibold text-offwhite border border-ice/25 bg-white/5">Termin</a>
+</div>
+
+<script>
+(function () {
+  // Module einzeln kapseln: ein Fehler darf nicht den Rest der Seite lahmlegen
+  function safe(fn) { try { fn(); } catch (e) { /* Entwurf: still */ } }
+
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Header: schrumpft beim Scrollen
+  safe(function () {
+    var header = document.getElementById('headerInner');
+    function onScroll() {
+      if (window.scrollY > 32) { header.classList.remove('py-3.5', 'lg:py-4'); header.classList.add('py-2.5'); }
+      else { header.classList.add('py-3.5', 'lg:py-4'); header.classList.remove('py-2.5'); }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  });
+
+  // Mobile-Nav (body.nav-open blendet die Sticky-CTA-Bar aus)
+  safe(function () {
+    var toggle = document.getElementById('navToggle');
+    var mobileNav = document.getElementById('mobileNav');
+    var iconBurger = document.getElementById('iconBurger');
+    var iconClose = document.getElementById('iconClose');
+    function closeNav() {
+      mobileNav.classList.add('hidden');
+      iconBurger.classList.remove('hidden'); iconClose.classList.add('hidden');
+      toggle.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('nav-open');
+    }
+    toggle.addEventListener('click', function () {
+      var nowHidden = mobileNav.classList.toggle('hidden');
+      iconBurger.classList.toggle('hidden', !nowHidden);
+      iconClose.classList.toggle('hidden', nowHidden);
+      toggle.setAttribute('aria-expanded', String(!nowHidden));
+      document.body.classList.toggle('nav-open', !nowHidden);
+    });
+    document.querySelectorAll('.mnav').forEach(function (a) { a.addEventListener('click', closeNav); });
+  });
+
+  // Reveal on Scroll
+  safe(function () {
+    var reveals = document.querySelectorAll('.reveal');
+    if (reduced || !('IntersectionObserver' in window)) {
+      reveals.forEach(function (el) { el.classList.add('in'); });
+    } else {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      reveals.forEach(function (el) { io.observe(el); });
+    }
+  });
+
+  // Count-up für Stats (Markup enthält den Endwert; animiert wird erst beim Eintritt)
+  safe(function () {
+    var counters = document.querySelectorAll('[data-count]');
+    function animateCount(el) {
+      var target = parseInt(el.getAttribute('data-count'), 10);
+      var start = null, dur = 1200;
+      function step(ts) {
+        if (!start) start = ts;
+        var p = Math.min((ts - start) / dur, 1);
+        el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+        if (p < 1) requestAnimationFrame(step);
+      }
+      el.textContent = '0';
+      requestAnimationFrame(step);
+    }
+    if ('IntersectionObserver' in window && !reduced) {
+      var cio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { animateCount(e.target); cio.unobserve(e.target); } });
+      }, { threshold: 0.6 });
+      counters.forEach(function (el) { cio.observe(el); });
+    }
+  });
+
+  // "Jetzt geöffnet"-Badge (Mo–Fr 09:30–17:00, Sa nach Vereinbarung)
+  safe(function () {
+    var badge = document.getElementById('openBadge');
+    var hint = document.getElementById('closedHint');
+    if (!badge) return;
+    var now = new Date(), day = now.getDay(), mins = now.getHours() * 60 + now.getMinutes();
+    var open = day >= 1 && day <= 5 && mins >= 570 && mins < 1020;
+    if (open) {
+      badge.innerHTML = '<span class="ml-2 inline-flex items-center gap-1.5 text-[11px] text-ice"><span class="w-1.5 h-1.5 rounded-full bg-ice inline-block"></span>Jetzt geöffnet</span>';
+    } else if (day === 6) {
+      badge.innerHTML = '<span class="ml-2 inline-flex items-center gap-1.5 text-[11px] text-frost"><span class="w-1.5 h-1.5 rounded-full bg-frost/70 inline-block"></span>Sa: nach Vereinbarung – ruf an</span>';
+    } else {
+      badge.innerHTML = '<span class="ml-2 inline-flex items-center gap-1.5 text-[11px] text-steel"><span class="w-1.5 h-1.5 rounded-full bg-steel/60 inline-block"></span>Gerade geschlossen</span>';
+      if (hint) hint.classList.remove('hidden');
+    }
+  });
+
+  // E-Mail zusammensetzen (kein Klartext im Quelltext); ein Klick genügt
+  var mail = document.getElementById('mailLink');
+  function buildMail() { return mail.getAttribute('data-u') + '@' + mail.getAttribute('data-d'); }
+  safe(function () {
+    mail.addEventListener('click', function (ev) {
+      ev.preventDefault();
+      var addr = buildMail();
+      mail.textContent = addr;
+      mail.setAttribute('href', 'mailto:' + addr);
+      window.location.href = 'mailto:' + addr;
+    });
+  });
+
+  // Service-CTAs wählen das passende Anliegen im Formular vor
+  safe(function () {
+    var select = document.getElementById('f-topic');
+    document.querySelectorAll('[data-topic]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        var t = a.getAttribute('data-topic');
+        [].slice.call(select.options).some(function (o, i) {
+          if (o.text.indexOf(t) !== -1) { select.selectedIndex = i; return true; }
+          return false;
+        });
+      });
+    });
+  });
+
+  // Platzhalter-Links (Impressum/Datenschutz im Entwurf) nicht springen lassen
+  safe(function () {
+    document.querySelectorAll('a.dead-link').forEach(function (a) {
+      a.addEventListener('click', function (ev) { ev.preventDefault(); });
+    });
+  });
+
+  // Formular-Attrappe: baut eine mailto-Nachricht
+  safe(function () {
+    var form = document.getElementById('contactForm');
+    form.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      if (!form.reportValidity()) return;
+      var name = document.getElementById('f-name').value;
+      var tel = document.getElementById('f-tel').value;
+      var topic = document.getElementById('f-topic').value;
+      var msg = document.getElementById('f-msg').value;
+      var body = 'Name: ' + name + '\nTelefon: ' + tel + '\nAnliegen: ' + topic + '\n\n' + msg;
+      var note = document.getElementById('formNote');
+      if (note) note.textContent = 'Dein E-Mail-Programm öffnet sich mit der fertigen Nachricht. Falls nicht: Ruf uns an – Service-Hotline 0178 6866110.';
+      window.location.href = 'mailto:' + buildMail() + '?subject=' + encodeURIComponent('Anfrage über die Website: ' + topic) + '&body=' + encodeURIComponent(body);
+    });
+  });
+})();
+</script>
+</body>
+</html>
